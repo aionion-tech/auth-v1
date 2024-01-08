@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import pool from "./db/connect";
+import { envConfig } from "./config";
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT;
 
 app.get("/", (req: Request, res: Response) => {
   pool.query("SELECT * FROM users", (err, result) => {
@@ -17,5 +17,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+  console.log(
+    `[server]: Server is running at http://localhost:${envConfig.SERVER.PORT}`
+  );
 });
