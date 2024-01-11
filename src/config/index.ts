@@ -5,6 +5,7 @@ const testEnvConfig = {
     database: "aionionv1_test",
     password: "Hello123",
     port: parseInt("5432"),
+    uri: "postgres://postgres:Hello123@localhost:5432/aionionv1_test",
   },
 
   SERVER: {
@@ -19,6 +20,7 @@ const developmentEnvConfig = {
     database: "aionionv1_dev",
     password: "Hello123",
     port: parseInt("5432"),
+    uri: "postgres://postgres:Hello123@localhost:5432/aionionv1_dev",
   },
 
   SERVER: {
@@ -33,6 +35,7 @@ const productionConfig = {
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: parseInt(process.env.DB_PORT as string),
+    uri: process.env.DB_URI as string,
   },
 
   SERVER: {

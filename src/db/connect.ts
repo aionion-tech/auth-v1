@@ -1,13 +1,8 @@
-import { Pool } from "pg";
 import { envConfig } from "../config";
+import { Sequelize } from "sequelize";
 
-console.log(envConfig);
-const pool = new Pool({
-  user: envConfig.DB.user,
-  host: envConfig.DB.host,
-  database: envConfig.DB.database,
-  password: envConfig.DB.password,
-  port: envConfig.DB.port,
+const sequelize = new Sequelize(envConfig.DB.uri, {
+  logging: false,
 });
 
-export default pool;
+export default sequelize;
