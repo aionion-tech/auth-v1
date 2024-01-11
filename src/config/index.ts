@@ -7,7 +7,9 @@ const testEnvConfig = {
     port: parseInt("5432"),
     uri: "postgres://postgres:Hello123@localhost:5432/aionionv1_test",
   },
-
+  jwt: {
+    secret: "secret",
+  },
   SERVER: {
     PORT: process.env.PORT || 3000,
   },
@@ -22,7 +24,9 @@ const developmentEnvConfig = {
     port: parseInt("5432"),
     uri: "postgres://postgres:Hello123@localhost:5432/aionionv1_dev",
   },
-
+  jwt: {
+    secret: "secret",
+  },
   SERVER: {
     PORT: process.env.PORT || 3000,
   },
@@ -37,7 +41,9 @@ const productionConfig = {
     port: parseInt(process.env.DB_PORT as string),
     uri: process.env.DB_URI as string,
   },
-
+  jwt: {
+    secret: process.env.JWT_SECRET,
+  },
   SERVER: {
     PORT: process.env.PORT,
   },

@@ -11,6 +11,8 @@ class UserModel extends Model<User> implements User {
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+  public comparePassword!: (password: string) => Promise<boolean>;
 }
 
 const User = UserModel.init(
@@ -41,5 +43,9 @@ User.beforeCreate(async (user) => {
   const salt = bcrypt.genSaltSync(10);
   user.password = bcrypt.hashSync(user.password, salt);
 });
+
+User.prototype.comparePassword = async function (password: string) {
+  return bcrypt.compareSync(password, this.password);
+};
 
 export { User };
