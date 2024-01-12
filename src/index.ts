@@ -10,10 +10,10 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/api/v1", router);
+app.use("/auth/api/v1", router);
 
-app.get("/echo", async (req: Request, res: Response) => {
-  res.status(200).send("Hey!");
+app.get("/auth/echo", async (req: Request, res: Response) => {
+  res.status(200).send("Hey auth!");
 });
 
 app.use(rootError);
