@@ -95,3 +95,31 @@ export const login = async (
     next(error);
   }
 };
+
+export const verifyToken = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const token = req.headers.authorization?.split("Bearer ")[1];
+
+    if (!token) {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
+
+    const payload = jwt.verify(token, process.env.JWT_SECRET!);
+
+    if (!payload) {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
+
+    res.status(200).json(payload);
+  } catch (error) {
+    next(error);
+  }
+};
