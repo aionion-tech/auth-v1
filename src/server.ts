@@ -1,10 +1,10 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
+dotenv.config();
+
 import { envConfig } from "./config";
 import router from "./routers";
 import { rootError } from "./middlewares/rootError.middleware";
-
-dotenv.config();
 
 const app = express();
 
