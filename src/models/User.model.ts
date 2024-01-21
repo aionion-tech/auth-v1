@@ -3,7 +3,7 @@ import { DataTypes, Model } from "sequelize";
 import { User } from "../interfaces/User.interface";
 import * as bcrypt from "bcryptjs";
 
-class UserModel extends Model<User> implements User {
+class UserClass extends Model<User> implements User {
   public id!: number;
   public username!: string;
   public email!: string;
@@ -15,7 +15,7 @@ class UserModel extends Model<User> implements User {
   public comparePassword!: (password: string) => Promise<boolean>;
 }
 
-const User = UserModel.init(
+const UserModel = UserClass.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -39,13 +39,13 @@ const User = UserModel.init(
   { tableName: "users", sequelize }
 );
 
-User.beforeCreate(async (user) => {
+UserModel.beforeCreate(async (user) => {
   const salt = bcrypt.genSaltSync(10);
   user.password = bcrypt.hashSync(user.password, salt);
 });
 
-User.prototype.comparePassword = async function (password: string) {
+UserModel.prototype.comparePassword = async function (password: string) {
   return bcrypt.compareSync(password, this.password);
 };
 
-export { User };
+export { UserModel };

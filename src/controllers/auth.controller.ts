@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import { User } from "../models/User.model";
+import { UserModel } from "../models/User.model";
 
 export const register = async (
   req: Request,
@@ -10,7 +10,7 @@ export const register = async (
   try {
     const { username, password, email } = req.body;
 
-    const user = await User.findOne({ where: { email } });
+    const user = await UserModel.findOne({ where: { email } });
 
     if (user) {
       return res.status(400).json({
@@ -18,7 +18,7 @@ export const register = async (
       });
     }
 
-    const newUser = await User.create({
+    const newUser = await UserModel.create({
       username,
       password,
       email,
@@ -38,7 +38,7 @@ export const login = async (
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ where: { email } });
+    const user = await UserModel.findOne({ where: { email } });
 
     if (!user) {
       return res.status(400).json({
